@@ -1,0 +1,20 @@
+{
+  "name": "on-next-api",
+  "version": "1.0.0",
+  "description": "An API that provides the next showing of a TV show",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tv"
+  ],
+  "author": "Mike Jancar",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^1.30.1",
+    "jsdom": "^14.0.0",
+    "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {}
+}
