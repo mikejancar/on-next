@@ -10,11 +10,23 @@ const tvdbCredentials = {
   "userkey": "OKTAPMDWI1N05B0Q"
 };
 
-exports.getNextEpisodeDate = async (event, context, callback) => {
-  const apiToken = await login();
-  const imdbId = await getImdbId(event.query, apiToken);
-  const nextAirDate = await getNextAirDate(imdbId);
-  return dates.format(nextAirDate, 'dddd, MMMM D, YYYY')
+exports.getNextEpisodeDate = async (event, context, callback) => { 
+  try {
+    const apiToken = await login();
+    if (apiToken) {
+      const imdbId = await getImdbId(event.query, apiToken);
+      if (imdbId) {
+        const nextAirDate = await getNextAirDate(imdbId);
+        const dateFormatted = dates.format(nextAirDate, 'dddd, MMMM D, YYYY');
+        if (dateFormatted !== 'Invalid Date') {
+          return { query: event.query, nextAirDate: dateFormatted };    
+        }
+      }
+    }
+  } catch (error) {
+    logMessage(`Unhandled exception: ${error}`, true);
+  }
+  return { query: event.query, nextAirDate: '' };
 }
 
 async function login() {
