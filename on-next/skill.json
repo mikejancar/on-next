@@ -1,0 +1,29 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "On Next allows you to find out when a certain TV show is showing next",
+          "examplePhrases": [
+            "Alexa open on next"
+          ],
+          "name": "on-next",
+          "description": "On Next allows you to find out when a certain TV show is showing next"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "N/A",
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom",
+          "uri": "ask-custom-on-next-default"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}

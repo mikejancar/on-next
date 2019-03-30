@@ -1,0 +1,33 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "on next",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "DefaultIntent",
+          "slots":[
+            {
+              "name": "Show",
+              "type": "AMAZON.TVSeries"
+            }
+          ],
+          "samples": [
+            "{Show}"
+          ]
+        }
+      ]
+    }
+  }
+}

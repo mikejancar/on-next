@@ -1,0 +1,15 @@
+{
+  "name": "on-next",
+  "version": "1.0.0",
+  "description": "On Next allows you to find out when a certain TV show is showing next",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mike Jancar",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-model": "^1.0.0"
+  }
+}
