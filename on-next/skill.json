@@ -5,7 +5,7 @@
         "en-US": {
           "summary": "On Next allows you to find out when a certain TV show is showing next",
           "examplePhrases": [
-            "Alexa open on next"
+            "Alexa ask on next about"
           ],
           "name": "on-next",
           "description": "On Next allows you to find out when a certain TV show is showing next"

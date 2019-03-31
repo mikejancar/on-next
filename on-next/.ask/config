@@ -6,7 +6,7 @@
       "merge": {},
       "resources": {
         "manifest": {
-          "eTag": "d9b5dfbd4d36f268dccb3f4bb9e18aa0"
+          "eTag": "74b65640bc8d7396e38ea741209a405e"
         },
         "interactionModel": {
           "en-US": {
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "ask-custom-on-next-default",
             "handler": "index.handler",
-            "revisionId": "8d6e0e99-f978-4e40-8a5b-84b51316c890",
+            "revisionId": "1006cbd4-dfdb-400f-948f-34bfa97d30b1",
             "runtime": "nodejs8.10"
           }
         ]

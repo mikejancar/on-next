@@ -2,6 +2,8 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk-core');
+const AWS = require('aws-sdk');
+AWS.config.region = 'us-east-1';
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -23,16 +25,37 @@ const DefaultIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'DefaultIntent';
   },
-  handle(handlerInput) {
-    console.log(JSON.stringify(handlerInput));
-    
+  async handle(handlerInput) {
+    var lambda = new AWS.Lambda();
+    var callParams = {
+      FunctionName: 'on-next-api-dev-getNextEpisodeDate',
+      InvocationType: 'RequestResponse',
+      LogType: 'Tail',
+    };
+
     let speechText = `I could not determine the show requested. Please try again.`;
 
     if (handlerInput.requestEnvelope.request.intent.slots.Show) {
       const showRequested = handlerInput.requestEnvelope.request.intent.slots.Show.value;
-      speechText = `You have requested the show ${showRequested}`;
-    }    
+      callParams.Payload = JSON.stringify({ query: showRequested });
 
+      const response = await lambda.invoke(callParams).promise();
+
+      if (response.FunctionError) {
+        console.error(`On Next API call failed: ${err.message}`);
+      } else {
+        const responseData = JSON.parse(response.Payload);
+        if (responseData.nextAirDate) {
+          speechText = `The next episode of ${responseData.query} is showing on ${responseData.nextAirDate}`;
+        } else {
+          speechText = `I could not find any upcoming episodes of ${responseData.query}`;
+        }
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .withSimpleCard('On Next', speechText)
+          .getResponse();
+      }
+    }
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard('On Next', speechText)
@@ -88,7 +111,7 @@ const ErrorHandler = {
     return true;
   },
   handle(handlerInput, error) {
-    console.log(`Error handled: ${error.message}`);
+    console.error(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
       .speak('Sorry, I didn\'t get that. Please try again.')
